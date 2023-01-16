@@ -4,7 +4,6 @@ project(ros_conversions)
 find_package(roscpp)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
-
 #find_package(Geometry)
 #include_directories(${geometry_INCLUDE_DIRS}
 if(NOT DEFINED ${geometry_INCLUDE_DIRS})
