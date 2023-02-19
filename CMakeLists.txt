@@ -13,7 +13,7 @@ endif(NOT DEFINED ${geometry_INCLUDE_DIRS})
 include_directories(${roscpp_INCLUDE_DIRS} include ${geometry_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR}) 
 
 add_library(ros_conversions
-            src/conversions.cpp
+            src/ros_conversions.cpp
 )
 
 target_link_libraries(ros_conversions PUBLIC ${roscpp_LIBRARIES} geometry)
