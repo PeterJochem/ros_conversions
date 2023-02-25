@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 project(ros_conversions)
+set(CMAKE_CXX_STANDARD 20)
 
 find_package(roscpp)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
