@@ -103,4 +103,42 @@ namespace ros_conversions {
 
         return mesh_marker;
     }
+
+    trajectory_msgs::JointTrajectory to_ros(planning::Trajectory trajectory) {
+        
+
+        std_msgs::Header header;
+        using namespace std::chrono;
+        header.stamp.sec = duration_cast<seconds>(system_clock::now().time_since_epoch()).count();
+
+        trajectory_msgs::JointTrajectory msg;
+        msg.header = header;
+
+        msg.joint_names.clear();
+        auto joint_names = trajectory.get_path().get_joint_names();
+        for (int i = 0; i < joint_names.size(); i++) {
+            msg.joint_names.push_back(joint_names[i]);
+        }
+
+        auto joint_states = trajectory.get_path().get_robot_states();
+        auto schedule = trajectory.get_schedule();
+        for (int i = 0; i < joint_states.size(); i++) {
+        
+            trajectory_msgs::JointTrajectoryPoint point;
+
+            // Update the schedule information. 
+            ros::Duration time_from_start(schedule[i]);
+            point.time_from_start = time_from_start;
+
+            // Update the position information.
+            auto joint_confiuration = joint_states[i].get_configuration();
+            for (int j = 0; j < joint_confiuration.size(); j++) {
+                point.positions.push_back(joint_confiuration[j]);
+            }
+
+            msg.points.push_back(point);
+        }
+
+        return msg;
+    }
 }

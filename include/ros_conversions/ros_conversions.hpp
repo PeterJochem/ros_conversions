@@ -10,6 +10,8 @@
 #include "geometry_msgs/Point.h"
 #include "geometry_msgs/Quaternion.h"
 #include "visualization_msgs/Marker.h"
+#include "trajectory_msgs/JointTrajectory.h"
+#include "planning/trajectory.hpp"
 #include<cstdlib>
 
 namespace ros_conversions {
@@ -24,6 +26,6 @@ namespace ros_conversions {
     geometry_msgs::Point to_ros_point(geometry::Transform transform);
     geometry_msgs::Quaternion to_ros_quaternion(float roll, float pitch, float yaw);
     visualization_msgs::Marker to_ros(geometry::VisualMesh mesh);
-
+    trajectory_msgs::JointTrajectory to_ros(planning::Trajectory);
 }
 #endif
